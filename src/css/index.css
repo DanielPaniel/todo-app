@@ -1,0 +1,75 @@
+:root {
+    --space--s: .3rem;
+    --space--m: 1rem;
+
+    --border-width: .05rem;
+
+    --text-size--s: .7rem;
+    --text-size--m: 1rem;
+    --text-size--l: 1.25rem;
+
+    --color-bg: #fbf8e6;
+    --color-border--1: #d2ddf6;
+    --color-border--2: #cecece;
+    --color-border--3: #f9d1c5;
+    --color-text--1: #000;
+    --color-text--2: #888;
+
+    --font-stack: 'Klee One', cursive;
+    --font-weight-normal: 400;
+    --font-weight-bold: 600;
+
+    @media (prefers-color-scheme: dark) {
+        --color-bg: #1e1e1e;
+        --color-border--1: #3f424a;
+        --color-border--2: #8f8f8f;
+        --color-border--3: #5b4c47;
+        --color-text--1: #fbf8e6;
+        --color-text--2: #c0c2c8;
+    }
+
+}
+html {
+    font-size: max(16px, min(5vw, 4vh));
+}
+body {
+    margin: 0;
+    background-color: var(--color-bg);
+}
+h1 {
+    margin: 0;
+}
+label, input, button {
+    padding: var(--space--s);
+}
+
+input[type="text"] {
+    border-radius: 0;
+    border: 0;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 3px; /* For focus outline to be visible */
+}
+
+button, label {
+    font-size: var(--text-size--s);
+}
+button {
+    margin: 3px; /* For focus outline to be visible */
+}
+ol {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }

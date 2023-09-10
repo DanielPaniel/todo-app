@@ -1,0 +1,182 @@
+.item {
+    --item-color: var(--color-text--1);
+
+    background: var(--color-bg);
+    border-bottom: var(--border-width) solid var(--color-border--1);
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0 var(--space--m);
+}
+.item.checked {
+    --item-color: var(--color-text--2);
+}
+
+.item form {
+    display: flex;
+    column-gap: var(--space--s);
+    align-items: center;
+}
+
+.item input[type="text"] {
+    font-family: var(--font-stack);
+    font-weight: var(--font-weight-normal);
+    font-size: var(--text-size--m);
+    color: var(--item-color);
+    background-color: var(--color-bg);
+    width: calc(100% - var(--text-size--l) - var(--space--m));
+}
+.item input[type="text"]::placeholder {
+    color: var(--color-text--2);
+    opacity: 1;
+}
+
+.item.checked input[type="text"] {
+    text-decoration:line-through;
+    color: var(--color-text--2);
+}
+
+.item input[type='checkbox'] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+.item .checkbox {
+    border: var(--border-width) solid var(--item-color);
+    border-radius: 0.1rem;
+    
+    width: var(--text-size--l);
+    height: var(--text-size--l);
+    padding: calc(var(--space--s));
+    margin: auto;
+    box-sizing: border-box;
+}
+.item .checkbox .checkmark {
+    width: 100%;
+    height: auto;
+    color: var(--item-color);
+    visibility: hidden;
+}
+.item .checkbox input[type='checkbox']:checked + .checkmark {
+    visibility: visible;
+}
+
+.item .options {
+    width: 100%;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+}
+
+.item .buttons {
+    margin: auto;
+    display: flex;
+    width: var(--text-size--l);
+}
+
+.item button {
+    cursor: pointer;
+    background: none;
+    border: none;
+    margin: auto;
+
+    width: var(--text-size--l);
+    height: var(--text-size--l);
+    padding: calc(var(--space--s));
+
+    color: var(--item-color);
+    box-sizing: border-box;    
+}
+.item .buttons svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+}
+.item:first-of-type button.prio {
+    display: none;
+}
+.item button.remove {
+    display: none;
+}
+.item input[type='text']:focus + .buttons button.remove, button.remove:focus, button.remove:hover {
+    display: block;
+}
+.item input[type='text']:focus + .buttons button.prio, button.remove:focus + button.prio {
+    display: none;
+}
+
+.item.prio {
+    animation: 650ms forwards prio_up cubic-bezier(.76,.26,.57,1.33);
+    transform: translateY(100%);
+}
+.item.prio + .item {
+    animation: 250ms forwards prio_down cubic-bezier(.76,.26,.57,1.33);
+    transform: translateY(-100%);
+    animation-delay: 200ms;
+}
+.item.remove {
+    animation: 500ms forwards remove_item ease-in;
+    transform: translateX(0);
+}
+.item.remove ~ .item {
+    animation: 250ms forwards slide_item_up cubic-bezier(.76,.26,.57,1.33);
+    animation-delay: 250ms;
+}
+.item.add {
+  transform: translateX(-100%);
+  animation: 250ms forwards add_item cubic-bezier(.76,.26,.57,1.33);
+  animation-delay: 250ms;
+}
+.item.add ~ .item {
+    transform: translateY(-100%);
+    animation: 250ms forwards slide_item_up reverse cubic-bezier(.3,-0.37,0,.74);
+  }
+
+@keyframes remove_item {
+    0% {
+        transform: translateX(0);
+    }
+    50%, 100% {
+        transform: translateX(110%);
+    }    
+}
+@keyframes slide_item_up {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-100%);
+    }
+}
+@keyframes add_item {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+@keyframes prio_up {
+    0% {
+        transform: translateX(0) translateY(100%);
+    }
+    33% {
+        transform: translateX(-100%) translateY(100%);
+    }
+    66% {
+        transform: translateX(-100%) translateY(0);
+    }
+    100% {
+        transform: translateX(0) translateY(0);
+    }
+}
+@keyframes prio_down {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
